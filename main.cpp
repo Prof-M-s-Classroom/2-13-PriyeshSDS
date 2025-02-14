@@ -68,9 +68,13 @@ public:
 
     void dellast() {
         Node<T> *temp = head;
-        while (temp->next!=NULL)
+        while (temp->next->next!=NULL) {
             temp = temp->next;
-        delete temp;
+        }
+        Node<T> *del = temp -> next;
+        temp -> next = NULL;
+        delete del;
+
         length--;
     }
 
@@ -95,6 +99,7 @@ public:
         else {
             Node<T> *prev = get(index -1);
             Node<T> *temp = prev->next;
+            prev->next = temp->next;
             delete temp;
             length--;
         }
@@ -110,9 +115,6 @@ public:
         }
         if (index == 0) {
             addhead(value);
-        }
-        if (index == length) {
-            addlast(value);
         }
         else {
             Node<T> *temp = get(index - 1);
@@ -155,10 +157,10 @@ int main() {
     student *s3 = new student("C", 22);
     LinkedList<student> *ll = new LinkedList<student>(s1);
     ll->add(s2);
-    ll->addhead(s3);
+    ll->add(s3);
     ll->print();
-    ll->delfirst();
+    ll->deleteNode(1);
+    ll->insert(0,s2);
     ll->print();
-    ll->dellast();
-    ll->print();
+
 }
