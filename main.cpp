@@ -34,6 +34,14 @@ public:
         this->length = 1;
         this->head = new Node<T>(value);
     }
+    ~LinkedList() {
+        Node<T> *node = this->head;
+        while (head != NULL) {
+            head = head->next;
+            delete node;
+            node = head;
+        }
+    }
     void add(T *value) {
         Node<T> *newNode = new Node<T>(value);
         Node<T> *temp = head;
@@ -119,6 +127,16 @@ public:
 
    void reverselist(){
         //TODO:Write a function to reverse the list using the logic from the slide.
+        Node<T> *prev, *curr, *next;
+        prev = NULL;
+        curr = head;
+        while (curr != NULL) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
     }
 
     void print() {
