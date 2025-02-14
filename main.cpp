@@ -96,6 +96,25 @@ public:
 
    void insert(int index, T *value) {
         //TODO:Write a function to insert a new node at a give index. Reuse the pre-written functions for edge cases. Account for missing index
+        if (index < 0 || index > length) {
+            cout << "Invalid index" << endl;
+            return;
+        }
+        if (index == 0) {
+            addhead(value);
+        }
+        if (index == length) {
+            addlast(value);
+        }
+        else {
+            Node<T> *temp = get(index - 1);
+
+            Node<T> *node = new Node<T>(value);
+            node->next = temp->next;
+            temp->next = node;
+            length++;
+        }
+        return;
     }
 
    void reverselist(){
