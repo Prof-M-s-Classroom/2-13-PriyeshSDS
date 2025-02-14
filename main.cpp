@@ -66,8 +66,32 @@ public:
         length--;
     }
 
+    Node<T> *get(int index) {
+        if ( index < 0 || index >= length ) {
+            return nullptr;
+        }
+        Node<T> *temp = this->head;
+        for (int i = 0; i < index; i++) {
+            temp = temp->next;
+        }
+        return temp;
+    }
     void deleteNode(int index) {
        //TODO:Write the function to delete at the given index. Reuse the pre-written functions for edge cases. Account for missing index.
+        if (index == 0) {
+            delfirst();
+        }
+        if (index == length) {
+            dellast();
+        }
+        else {
+            Node<T> *prev = get(index -1);
+            Node<T> *temp = prev->next;
+            delete temp;
+            length--;
+        }
+        return;
+
     }
 
    void insert(int index, T *value) {
